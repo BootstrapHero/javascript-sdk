@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Javascript-sdk : Javascript libraries for interacting with the Bootstrap Hero service" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Javascript-sdk</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/BootstrapHero/javascript-sdk">View on GitHub</a>
+
+          <h1 id="project_title">Javascript-sdk</h1>
+          <h2 id="project_tagline">Javascript libraries for interacting with the Bootstrap Hero service</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/BootstrapHero/javascript-sdk/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/BootstrapHero/javascript-sdk/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Bootstrap Hero Javascript SDK</h1>
+
+<p>This repository is a collection of scripts, examples and documentation to help you integrate your site with the Bootstrap Hero service. Typically, this is used by web applications that would let their users customize or brand their own pages within a larger site.</p>
+
+<h4>Example Uses Might Include:</h4>
+
+<ul>
+<li>Bands customizing their own page on a concert site</li>
+<li>Startups setting a color scheme that matches their logo </li>
+<li>A Theme Provider letting individual users personalize a theme</li>
+</ul><h4>What We Replace</h4>
+
+<p>Our main user interface element is the embeddable Style Editor (screenshot below) which conceptually replaces the "type CSS into this big empty textarea" that is found on many sites' customization pages.</p>
+
+<p>We want to make it easy for your users to create a great looking page so that they love your service even more.</p>
+
+<pre><code>* Palettes with colors that already work together
+* Curated and appropriate font choices for headers and body type (we'll guide your users away from Comic Lobster)
+* Translucent background images
+* Realtime Previews of all design choices with your current contact 
+</code></pre>
+
+<h4>Bootstrap Hero Style Editor</h4>
+
+<p><img src="https://raw.github.com/BootstrapHero/javascript-sdk/master/demo/images/screenshot.jpg" alt="Style Editor"></p>
+
+<h3>User Style Customization Workflow</h3>
+
+<p>After you've set everything up, this is the process your users would see.</p>
+
+<ol>
+<li>From within your site, users would Launch the Style Editor by clicking a link or button.</li>
+</ol><pre><code>* Users never leave your site
+* Users never see anything but your branding
+* Styling process can be embedded in other workflows (signup, template customization)
+</code></pre>
+
+<ol>
+<li><p>Users choose palettes, backgrounds and fonts from the Icon and Form bars, while viewing the results of their work in the Preview Frame.</p></li>
+<li><p>Once they are happy with their new style, users hit a "Publish" button (that you've specified) and the styles are permanently set on their pages.</p></li>
+</ol><h2>GETTING STARTED</h2>
+
+<h4>Prerequisites</h4>
+
+<p>You'll need a few things:</p>
+
+<ul>
+<li>An API Key</li>
+<li>A page on your site where you'd like the style editor embedded, the 'Style Page'</li>
+<li>A page (or pages) with the previewer.js file included, this page is what you specify with the preview_url option.</li>
+</ul><h4>Usage</h4>
+
+<p>1 - Add Styler.js to a page</p>
+
+<div class="highlight"><pre>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://bsh-assets-origin.s3.amazonaws.com/js/v1/styler.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+
+<p>Then, within your ready block, call the editor after customizing the inputs. </p>
+
+<div class="highlight"><pre>    <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+          <span class="nx">BSHStyler</span><span class="p">.</span><span class="nx">launch</span><span class="p">({</span>
+                  <span class="c1">// REQUIRED</span>
+                  <span class="nx">api_key</span><span class="o">:</span> <span class="s1">'YOUR-API-KEY'</span><span class="p">,</span>
+                  <span class="nx">target_selector</span><span class="o">:</span> <span class="s1">'#YOUR-TARGET-SELECTOR'</span><span class="p">,</span>
+                  <span class="nx">client_lookup_key</span><span class="o">:</span> <span class="s1">'YOUR-CLIENT-LOOKUP-ID'</span><span class="p">,</span>
+                  <span class="nx">bootstrap_version</span><span class="o">:</span> <span class="s1">'2.3.1'</span><span class="p">,</span>
+                  <span class="nx">api_version</span><span class="o">:</span> <span class="s1">'v1'</span><span class="p">,</span>
+
+                  <span class="c1">// OPTIONAL</span>
+                  <span class="nx">preview_url</span><span class="o">:</span> <span class="s1">'https://example.com/users/40/profile_page'</span>
+
+           <span class="p">});</span>
+    <span class="p">});</span>
+</pre></div>
+
+<p>2 - After your user edits the style - call <strong>BSHStyler.publish(myBSHResponseHandler)</strong></p>
+
+<div class="highlight"><pre>      <span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">'BSHEditor.publish(myBSHResponseHandler);'</span><span class="nt">&gt;</span>Publish<span class="nt">&lt;/button&gt;</span>
+</pre></div>
+
+<p>3 - In your myBSHResponseHandler() </p>
+
+<ul>
+<li>Retrieve the token representing this particular iteration of this user's design.</li>
+<li>Save the token to your system </li>
+<li>Redirect the user to their custom styled page</li>
+</ul><div class="highlight"><pre>
+     <span class="kd">function</span> <span class="nx">myBSHResponseHandler</span><span class="p">(){</span>          
+          <span class="kd">var</span> <span class="nx">designToken</span> <span class="o">=</span> <span class="nx">BSHEditor</span><span class="p">.</span><span class="nx">token</span><span class="p">();</span>
+
+          <span class="c1">// You need to implement</span>
+          <span class="c1">// An AJAX Call to save the design token in your system that redirects on success</span>
+          <span class="c1">// $.post('yoursite.com/update/', {'design_token': designToken})</span>
+          <span class="c1">//   .done(function(data) {</span>
+          <span class="c1">//            window.location.href = "http://yoursite.com/user-branded-page/";</span>
+          <span class="c1">// });</span>
+          <span class="c1">//         </span>
+      <span class="p">}</span>
+</pre></div>
+
+<p>4 - On the users custom styled page, use the token to reference their design</p>
+
+<div class="highlight"><pre>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">'stylesheet'</span> <span class="na">src=</span><span class="s">'//cdn-design-assets.bootstraphero.com/TOKEN/design.css'</span><span class="nt">&gt;</span>
+
+</pre></div>
+
+<h3>STYLER.JS CONFIGURATION OPTIONS</h3>
+
+<p>On the Style Page, first include the styler.js file after your jQuery include.</p>
+
+<h3>Required</h3>
+
+<h4>target_selector</h4>
+
+<p>The location within your Style Page where you'd like the Style Editing window to be placed. Typically this is a large div on your Style Page. </p>
+
+<div class="highlight"><pre>    <span class="c1">//Examples:</span>
+        <span class="nx">target_selector</span><span class="o">:</span> <span class="s1">'#style-container'</span>
+        <span class="nx">target_selector</span><span class="o">:</span> <span class="s1">'.editor div'</span>
+</pre></div>
+
+<h4>client_lookup_key</h4>
+
+<p>Your identifier for the launched design, and typically the same identifier you use in identifying your users.</p>
+
+<p>If a new client_lookup_key is passed into the Style Editor a new Design is created. </p>
+
+<p>If an existing (you've passed it in before) client_lookup_id is passed into the Style Editor the previously created design is launched for editing.</p>
+
+<div class="highlight"><pre>    <span class="c1">//Examples:</span>
+        <span class="nx">client_lookup_key</span><span class="o">:</span> <span class="s1">'1'</span>
+        <span class="nx">client_lookup_key</span><span class="o">:</span> <span class="s1">'user-25-site-300'</span>
+        <span class="nx">client_lookup_key</span><span class="o">:</span> <span class="s1">'app-2030'</span>
+</pre></div>
+
+<h4>bootstrap_version</h4>
+
+<p>Semantically tagged version of Bootstrap that you are using. </p>
+
+<div class="highlight"><pre>    <span class="c1">//Examples:</span>
+        <span class="nx">bootstrap_version</span><span class="o">:</span> <span class="s1">'2.1.0'</span>
+        <span class="nx">bootstrap_version</span><span class="o">:</span> <span class="s1">'2.1.3'</span>
+</pre></div>
+
+<h4>api_key</h4>
+
+<p>Your API Key from the Bootstrap Hero site.</p>
+
+<h4>api_version</h4>
+
+<p>Version of the Bootstrap Hero API you'd like to interact with.</p>
+
+<h3>Optional</h3>
+
+<h4>preview_url</h4>
+
+<blockquote>
+<p>Important: After setting the preview_url you'll still need to include previewer.js on the preview_url page </p>
+</blockquote>
+
+<div class="highlight"><pre>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://bsh-assets-origin.s3.amazonaws.com/js/v1/previewer.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+
+<p>A URL on your site that you would like to have shown in the viewport window of the style editor.</p>
+
+<p>Typically, this is the page that your users are customizing for themselves. </p>
+
+<p>If not specified, a default page showcasing how the chosen style elements (fonts, palettes and backgrounds) will look applied to various Bootstrap components. </p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Javascript-sdk maintained by <a href="https://github.com/BootstrapHero">BootstrapHero</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
