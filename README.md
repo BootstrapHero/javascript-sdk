@@ -63,18 +63,80 @@ Then, within your ready block, call the editor after customizing the inputs.
 
 ```javascript
     $(function() {
-          BSHStyler.launch({
-                  // REQUIRED
-                  api_key: 'YOUR-API-KEY',
-                  target_selector: '#YOUR-TARGET-SELECTOR',
-                  client_lookup_key: 'YOUR-CLIENT-LOOKUP-ID',
-                  bootstrap_version: '2.3.1',
-                  api_version: 'v1',
+     BSHStyler.launch({
+              // If you have any troubles with this, please email me at 
+              // mike@bootstraphero.com or call 330.329.8016 and I'll help you out.
+              //
+              // This javascript should go into the page where you would like the Style Editor
+              // to be displayed. It needs to have jQuery and the styler.js referenced before launch
+              //
+              // The Styler.js include is at:
+              // 
+              //    https://bsh-assets-origin.s3.amazonaws.com/js/v1/styler.js
+              //                        
+              // api_key: To get your API key, sign up at 
+              //
+              //    http://www.bootstraphero.com/users/sign_up
+              //               
+              api_key: 'YOUR-API-KEY',
 
-                  // OPTIONAL
-                  preview_url: 'https://example.com/users/40/profile_page'
+              // target_selector: a jQuery selector for where you would like the Style Editor
+              // placed within your page.
+              //
+              //Examples:
+              //    target_selector: '#style-container'
+              //    target_selector: '.editor div'
+              target_selector: '#YOUR-TARGET-JQUERY-SELECTOR',
 
-           });
+              // design_lookup_key: Your identifier for the launched design, and typically the 
+              // same identifier (or combination of identifiers) that you use in identifying 
+              // your users, pages and apps.
+              // 
+              // If a new design_lookup_key is passed into the Style Editor a new Design is created.
+              //
+              // If an existing (you've passed it in before) design_lookup_key is passed into the
+              // Style Editor the previously created design is launched for editing.
+              //
+              // Examples:
+              //      design_lookup_key: '1'
+              //      design_lookup_key: 'user-25-site-300'
+              //      design_lookup_key: 'app-2030'        
+              design_lookup_key: '#YOUR-DESIGN-LOOKUP-KEY',
+
+              // Semantically tagged version of Bootstrap that you are using.
+              // 
+              // Examples:
+              //        bootstrap_version: '2.1.0'
+              //        bootstrap_version: '2.3.1'
+              //
+              // Currently 2.3.1 is the latest production version of Bootstrap
+              bootstrap_version: '2.3.1',
+              
+              // api_version
+              // for future compatibility. For now there is only 'v1'
+              api_version: 'v1',
+
+              // OPTIONAL ITEMS          
+              // 
+              // preview_url
+              // A URL on your site that you would like to have shown in the viewport window of the style editor.
+              //
+              // Typically, this is the page that your users are customizing for themselves.
+              //
+              // If not specified, a default page showcasing how the chosen style elements (fonts, palettes and 
+              // backgrounds) will look applied to various Bootstrap components.
+              //
+              // IMPORTANT: In order for the real-time display to work you'll need to include previewer.js on the 
+              // preview_url specified page
+              //
+              // The Previewer.js include is at:
+              // 
+              //    https://bsh-assets-origin.s3.amazonaws.com/js/v1/previewer.js
+              //
+              // Examples:
+              //      preview_url: 'http://mysite.com/app_site/show/343'
+
+          });
     });
 ```
 
@@ -112,67 +174,5 @@ Then, within your ready block, call the editor after customizing the inputs.
 <link rel='stylesheet' src='//cdn-design-assets.bootstraphero.com/TOKEN/design.css'>
 
 ```
-
-
-
-### STYLER.JS CONFIGURATION OPTIONS
-On the Style Page, first include the styler.js file after your jQuery include.
-
-### Required
-
-#### target_selector
-The location within your Style Page where you'd like the Style Editing window to be placed. Typically this is a large div on your Style Page. 
-
-```javascript
-    //Examples:
-        target_selector: '#style-container'
-        target_selector: '.editor div'
-```
-
-#### client_lookup_key
-Your identifier for the launched design, and typically the same identifier you use in identifying your users.
-
-If a new client_lookup_key is passed into the Style Editor a new Design is created. 
-
-If an existing (you've passed it in before) client_lookup_id is passed into the Style Editor the previously created design is launched for editing.
-
-```javascript
-    //Examples:
-        client_lookup_key: '1'
-        client_lookup_key: 'user-25-site-300'
-        client_lookup_key: 'app-2030'
-```
-
-#### bootstrap_version
-Semantically tagged version of Bootstrap that you are using. 
-
-```javascript
-    //Examples:
-        bootstrap_version: '2.1.0'
-        bootstrap_version: '2.1.3'
-```
-
-#### api_key 
-Your API Key from the Bootstrap Hero site.
-
-#### api_version
-Version of the Bootstrap Hero API you'd like to interact with.
-
-### Optional
-
-#### preview_url
-
-> Important: After setting the preview_url you'll still need to include previewer.js on the preview_url page 
-
-```html
-    <script src="https://bsh-assets-origin.s3.amazonaws.com/js/v1/previewer.js"></script>
-```
-
-A URL on your site that you would like to have shown in the viewport window of the style editor.
-
-Typically, this is the page that your users are customizing for themselves. 
-
-If not specified, a default page showcasing how the chosen style elements (fonts, palettes and backgrounds) will look applied to various Bootstrap components. 
-
 
 
