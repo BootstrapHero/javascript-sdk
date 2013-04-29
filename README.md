@@ -2,9 +2,9 @@ Bootstrap Hero Javascript SDK
 =========
 This repository is a collection of scripts, examples and documentation to help you integrate your site with the Bootstrap Hero service. Typically, this is used by web applications that would let their users customize or brand their own pages within a larger site.
 
-#### Example Uses Might Include:
-  - Bands customizing their own page on a concert site
-  - Startups setting a color scheme that matches their logo 
+#### Your SAAS App Might Benefit from this if you have:
+  - Startups setting a color scheme that matches their logo
+  - Bands customizing their page within your concert listing service
   - A Theme Provider letting individual users personalize a theme
 
 #### What We Replace
