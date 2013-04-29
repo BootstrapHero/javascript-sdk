@@ -171,7 +171,7 @@ Then, within your ready block, call the editor after customizing the inputs.
 
 ```html
 
-<link rel='stylesheet' src='//cdn-design-assets.bootstraphero.com/TOKEN/design.css'>
+<link rel='stylesheet' src='https://bsh_sites_dev.s3.amazonaws.com/site/YOUR_API_KEY/DESIGN_TOKEN/design.css'>
 
 ```
 
